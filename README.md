@@ -16,3 +16,10 @@ From the book: Java 9 Modularity (Sander Mak & Paul Bakker)
     - Alternatively: `jar -c -f mods/easytext-cli.jar --main-class javamodularity.easytext.cli.Main -C out/easytext.cli .`
 4. Package the exploded compiled module easytext.analysis: `jar -c -f mods/easytext-analysis.jar  -C out/easytext.analysis .`
 5. Run the application (jar packaged): `java --module-path mods --module easytext.cli`
+
+### Using jlink
+
+Using jlink, we can make a fully self-contained runtime, tailored to our application. Including an executable (`bin/execute-me.bat`) to run our application.
+1. Make sure to have generated the required jars in the `mods` folder...
+2. Generate an image: `jlink --module-path mods;"%JAVA_HOME%\jmods" --add-modules easytext.cli,easytext.analysis --launcher execute-me=easytext.cli --output easytext-image`
+3. Navigate to `easytext-image/bin/execute-me.bat` to launch the application.
